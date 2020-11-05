@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, redirect
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -16,15 +16,24 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+@app.route('/add')
+def add():
+    return render_template('file.html')
 
-def addItem():
-    admin = User(username = 'admin', email = 'admin@gmail.com', mess = 'To create the initial database, just import the db object')
-    quest = User(username = 'quest', email = 'quest@mail.com', mess = 'SQLAlchemy.create_all() method to create the tables and database:')
-    messeg = User()
-    db.session.add(admin)
-    db.session.add(quest)
-    db.session.commit()
 
+
+
+@app.route('/uploads', methods=['POST', 'GET'])
+def insert():
+    if request.method == 'POST':
+        user_name = request.form['username']
+        user_email = request.form['email']
+        user_mess = request.form['mess']
+        admin = User(username = user_name, email = user_email, mess = user_mess)
+        messeg = User()
+        db.session.add(admin)
+        db.session.commit()
+        return redirect(url_for('index'))
 
 @app.route('/')
 def index():

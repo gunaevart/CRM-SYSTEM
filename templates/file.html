@@ -1,10 +1,11 @@
 <!doctype html>
 <title>Upload new File</title>
 <h1>Upload new File</h1>
-<!-- {{ url_for('uploads') }} -->
-<form action="/uploads" method=post enctype=multipart/form-data>
-    <input type=file name=file accept="txt/*" multiple>
-     <input type=submit value=Upload>
+
+<form action="/uploads" method=post >
+    <input type=input name=username >
+    <input type=input name=email >
+    <input type=input name=mess >
+     <input type=submit value=записать>
 </form>
 
-<img src="/static/images/{{ file }}" alt="" width="400">
