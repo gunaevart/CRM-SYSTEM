@@ -27,7 +27,6 @@ def insert():
         date = request.form['date']
 
         with con.cursor() as cursor:
-            # Create a new record
             sql = "INSERT INTO `orders` (`user`, `user_order`, `date`) VALUES (%s, %s, %s)"
             cursor.execute(sql, (user, user_order, date))
             con.commit()
